@@ -1,0 +1,9 @@
+PATHS = \
+	-DSHELL='"$(SHELL)"' \
+	-DETCDIR='"$(ETCDIR)"' \
+	-DBINDIR='"$(BINDIR)"' \
+	-DSBINDIR='"$(SBINDIR)"' \
+	-DSADMDIR='"$(SADMDIR)"' \
+	-DVSADMDIR='"$(VSADMDIR)"' \
+	-DVSADMREL='"$(VSADMDIR:/%=%)"'
+
