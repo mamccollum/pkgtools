@@ -496,7 +496,7 @@ ds_init(char *device, char **pkg, char *norewind)
 	}
 	/* this could break, thanks to cpio command limit */
 #ifndef SUNOS41
-	(void) sprintf(cmd, "%s -icdumD -C %d", CPIOPROC, (int)BLK_SIZE);
+	(void) sprintf(cmd, "%s -icdum -C %d", CPIOPROC, (int)BLK_SIZE);
 #else
 	(void) sprintf(cmd, "%s -icdum -C %d", CPIOPROC, (int)BLK_SIZE);
 #endif
@@ -717,7 +717,7 @@ ds_next(char *device, char *instdir)
 			ds_curpartcnt += index;
 		}
 #ifndef SUNOS41
-		(void) sprintf(cmd, "%s -icdumD -C %d",
+		(void) sprintf(cmd, "%s -icdum -C %d",
 #else
 		(void) sprintf(cmd, "%s -icdum -C %d",
 #endif

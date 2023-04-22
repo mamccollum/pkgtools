@@ -25,4 +25,7 @@ To clean the directories after running `make`:
 make mrproper
 ```
 
+NOTE: To do a statically linked build instead of dynamic, edit `src/mk.config.head` and appent `-static` to the lines beginning with `LDFLAGS` and `CCSLDFLAGS`.
+
+
 There is an example package in `example-pkg`, along with scripts that have comments on how to compile.
