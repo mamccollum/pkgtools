@@ -670,7 +670,7 @@ ds_skip(char *device, int nskip)
 	while (nskip--) {
 		/* skip this one */
 #ifndef SUNOS41
-		(void) sprintf(cmd, "%s -ictD -C %d > /dev/null",
+		(void) sprintf(cmd, "%s -ict -C %d > /dev/null",
 #else
 		(void) sprintf(cmd, "%s -ict -C %d > /dev/null",
 #endif
