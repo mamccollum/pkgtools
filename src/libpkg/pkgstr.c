@@ -895,7 +895,11 @@ static char		*M = " KMGTPE"; /* Measurement: */
 
 	/* convert out the number from the input buffer */
 
-	number = strtoull(a_buf, (char **)NULL, 10);
+	#ifdef __APPLE__
+		number = strtoul(a_buf, NULL, 10);
+	#else
+		number = strtoull(a_buf, (char **)NULL, 10);
+	#endif /* __APPLE__ */
 
 	/* if conversion error, return "-1" */
 

@@ -39,7 +39,9 @@
 #include <string.h>
 #include <signal.h>
 #include <errno.h>
+#ifndef __APPLE__
 #include <malloc.h>
+#endif
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
@@ -49,7 +51,14 @@
 #include <sys/param.h>
 #include <ctype.h>
 #include <sys/mman.h>
+#ifdef __APPLE__
+#include <sys/disk.h>
+#define statvfs64 statvfs
+#define fsblkcnt64_t fsblkcnt_t
+#define fsfilcnt64_t fsfilcnt_t
+#else
 #include <sys/sysmacros.h>
+#endif
 #include <strings.h>
 #include <pkgstrct.h>
 #include <pkgdev.h>

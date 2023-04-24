@@ -42,7 +42,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <utime.h>
+#ifndef __APPLE__
 #include <malloc.h>
+#endif /* !__APPLE__ */
 #include <sys/types.h>
 #include <sys/param.h>
 #include <sys/stat.h>
@@ -59,7 +61,14 @@
 #ifdef __sun
 #include <sys/mkdev.h>
 #endif
+#ifdef __APPLE__ /* sysmacros no workie on apple :( */
+#include <sys/disk.h>
+#include <sys/statvfs.h>
+#define statvfs64 statvfs
+#define O_LARGEFILE 0
+#else
 #include <sys/sysmacros.h>
+#endif
 #include "pkglocale.h"
 
 #define	WDMSK	0xFFFF

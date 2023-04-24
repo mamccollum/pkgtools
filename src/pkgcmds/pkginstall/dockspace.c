@@ -54,6 +54,10 @@
 #include "libinst.h"
 #include "pkginstall.h"
 
+#ifdef __APPLE__
+#define statvfs64 statvfs
+#endif
+
 extern struct cfextra **extlist;
 extern char	pkgloc[];
 extern char	instdir[];

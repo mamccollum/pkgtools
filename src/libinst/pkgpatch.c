@@ -44,7 +44,11 @@
 #include <string.h>
 #include <errno.h>
 #include <assert.h>
+#ifndef __APPLE__
 #include <wait.h>
+#else
+#include <sys/wait.h>
+#endif
 #include <limits.h>
 #include <dirent.h>
 #include <libintl.h>

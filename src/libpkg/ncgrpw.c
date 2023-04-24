@@ -49,6 +49,20 @@
 #include "pkglocale.h"
 #include "nhash.h"
 
+#ifdef __APPLE__
+#include <uuid/uuid.h>
+/* 
+ * boilerplate hacky stuff to make this compile on OS X
+ * fgetpwent -> getpwent
+ * fgetgrent -> getgrent
+ */
+long int ftell(FILE *stream) { return 0; }
+int fgetpwent(FILE *stream) { return getpwent(); }
+int fgetgrent(FILE *stream) { return getgrent(); }
+
+#endif
+
+
 #define	HASHSIZE	151
 #define	BSZ		4
 

@@ -41,7 +41,12 @@
 #include <stdlib.h>
 #include <sys/param.h>
 #include <sys/stat.h>
-#include <sys/sysmacros.h>
+#if defined (__linux__)
+#include	<sys/sysmacros.h>
+#endif /* defined (__linux__) */
+#if defined (__sun) && !defined (SUNOS41) || defined (__OSX__)
+#include	<sys/mkdev.h>
+#endif /* defined (__sun) && !defined (SUNOS41) || defined (__OSX__) */
 #include <sys/vfstab.h>
 #ifdef	__sun
 #include <sys/lofi.h>

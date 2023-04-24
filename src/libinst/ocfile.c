@@ -39,7 +39,13 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/param.h>
+#ifdef __APPLE__
+#include <sys/statvfs.h>
+#define statvfs64 statvfs
+#define fstatvfs64 fstatvfs
+#else
 #include <sys/sysmacros.h>
+#endif
 #include <string.h>
 #include <strings.h>
 #include <sys/wait.h>
@@ -717,11 +723,20 @@ pkgWlock(int verbose) {
 		if (lockf(lock_fd, F_LOCK, 0)) {
 			if (errno == EAGAIN || errno == EINTR)
 				logerr(gettext(MSG_XWTING));
+			#ifdef __APPLE__
+			else if (errno == EDEADLK) {
+				logerr(gettext(ERR_DEADLCK));
+				retval = 0;
+				break;
+			}
+			#else
 			else if (errno == ECOMM) {
 				logerr(gettext(ERR_LCKREM));
 				retval = 0;
 				break;
-			} else if (errno == EBADF) {
+			}
+			#endif
+			else if (errno == EBADF) {
 				logerr(gettext(ERR_BADLCK));
 				retval = 0;
 				break;

@@ -42,9 +42,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#ifdef __APPLE__
+#include <sys/wait.h>
+#else
 #include <wait.h>
+#endif
 #include <signal.h>
+#ifndef __APPLE__
 #include <malloc.h>
+#endif
 #include <sys/types.h>
 #include <sys/mount.h>
 #include <sys/stat.h>
@@ -1297,7 +1303,11 @@ get_inode_used_n(short n)
  *	Note: Upon entry, a valid fsys() is required.
  */
 void
+#ifdef __APPLE__
+set_blk_used_n(short n, unsigned long value)
+#else
 set_blk_used_n(short n, ulong_t value)
+#endif
 {
 	fs_tab[n]->bused = value;
 }
@@ -1461,13 +1471,34 @@ get_fs_entry(short n)
 #ifndef	__sun
 #undef	getmntent
 #undef	MNTTAB
+/* Apple & BSDs */
+#ifdef __APPLE__
+#include <sys/mntent.h>
+#else
 #include <mntent.h>
+#endif
 
 static int
 _getmntent(FILE *fp, struct mnttab *tp)
 {
-	struct mntent	*mp;
+	#ifdef __APPLE__
+	/* use getmntinfo() on Darwin */
+	struct statfs *mntbufp;
+	int i, mntsize;
 
+	mntbufp = NULL;
+	mntsize = getmntinfo(&mntbufp, MNT_NOWAIT);
+	if (mntsize == 0)
+		return -1;
+	for (i = 0; i < mntsize; i++) {
+		tp->mnt_special = mntbufp[i].f_mntfromname;
+		tp->mnt_mountp = mntbufp[i].f_mntonname;
+		tp->mnt_fstype = mntbufp[i].f_fstypename;
+		tp->mnt_mntopts = mntbufp[i].f_flags;
+		tp->mnt_time = "0";
+	}
+	#else
+	struct mntent	*mp;
 	if ((mp = getmntent(fp)) == NULL)
 		return -1;
 	tp->mnt_special = mp->mnt_fsname;
@@ -1475,6 +1506,7 @@ _getmntent(FILE *fp, struct mnttab *tp)
 	tp->mnt_fstype = mp->mnt_type;
 	tp->mnt_mntopts = mp->mnt_opts;
 	tp->mnt_time = "0";
+	#endif
 	return 0;
 }
 #endif	/* !__sun */

@@ -1,12 +1,11 @@
 SHELL = /bin/sh
 VAR=/var
 CFLAGS = -O
-LDFLAGS=
+LDFLAGS=-L/usr/local/opt/openssl@3/lib -lintl
 CCSLDFLAGS=
-CPPFLAGS=-D_GNU_SOURCE -std=c89
+CPPFLAGS=-D_GNU_SOURCE -std=c89 -I/usr/local/opt/openssl@3/include
 STRIP=strip -s -R .comment -R .note
 LNS = ln -s
-
 # Where to place binaries.
 BINDIR=$(PREFIX)/bin
 # Where to place superuser-only binaries. This may be

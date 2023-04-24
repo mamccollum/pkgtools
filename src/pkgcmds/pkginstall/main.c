@@ -37,7 +37,11 @@
 
 #include <stdio.h>
 #include <time.h>
+#ifdef __APPLE__
+#include <sys/wait.h>
+#else
 #include <wait.h>
+#endif
 #include <stdlib.h>
 #include <unistd.h>
 #include <ulimit.h>
@@ -67,6 +71,10 @@
 #include <dryrun.h>
 #include <messages.h>
 #include "pkginstall.h"
+
+#ifdef __APPLE__
+#define statvfs64 statvfs
+#endif
 
 #undef	P_tmpdir
 #define	P_tmpdir	"/var/tmp/"

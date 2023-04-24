@@ -55,6 +55,12 @@
 #include <errno.h>
 #include "libadm.h"
 
+/* make this accomodation for Apple/Darwin based systems */
+#if defined (__APPLE__)
+#define readdir64 readdir
+#define dirent64 dirent
+#endif
+
 static void	initpkg(struct pkginfo *);
 static char	*svr4inst(char *);
 static int	rdconfig(struct pkginfo *, char *, char *);

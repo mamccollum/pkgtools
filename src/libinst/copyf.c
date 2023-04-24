@@ -41,7 +41,9 @@
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
+#ifndef __APPLE__
 #include <malloc.h>
+#endif
 #include <unistd.h>
 #include <libgen.h>
 #include <fcntl.h>
@@ -278,7 +280,11 @@ copyFile(int a_srcFd, int a_dstFd, char *a_srcPath, char *a_dstPath,
 
 		/* allocate i/o transfer buffer */
 
+		#ifndef __APPLE__
 		buf = memalign((size_t)pagesize, blocksize);
+		#else
+		buf = malloc(blocksize);
+		#endif
 		if (buf == (char *)NULL) {
 			progerr(ERR_COPY_MEMORY, a_srcPath, errno,
 				strerror(errno));

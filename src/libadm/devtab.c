@@ -69,11 +69,13 @@
  *	"devtab.h"		Local Device Management definitions
  */
 
+#if defined (__linux__)
 #include	<sys/sysmacros.h>
+#endif /* defined (__linux__) */
 #include	<sys/types.h>
 #if defined (__sun) && !defined (SUNOS41)
 #include	<sys/mkdev.h>
-#endif
+#endif /* defined (__sun) && !defined (SUNOS41) || defined (__OSX__) */
 #include	<unistd.h>
 #include	<stdio.h>
 #include	<string.h>

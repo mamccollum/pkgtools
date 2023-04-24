@@ -51,6 +51,12 @@
 #include <libadm.h>
 #include <libinst.h>
 
+#ifdef __APPLE__
+#define fsblkcnt64_t fsblkcnt_t
+#define fsfilcnt64_t fsfilcnt_t
+#endif
+
+
 extern struct pkgdev pkgdev;
 
 #define	MALSIZ	500

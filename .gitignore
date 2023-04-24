@@ -44,3 +44,6 @@ src/valtools/ckuid
 src/valtools/ckyorn
 src/valtools/puttext
 src/ccs
+
+# etc
+.vscode/

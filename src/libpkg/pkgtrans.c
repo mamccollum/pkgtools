@@ -50,7 +50,14 @@
 #include <sys/param.h>
 #include <sys/stat.h>
 #include <sys/statvfs.h>
+#ifdef __APPLE__ /* sysmacros no workie on apple :( */
+#include <sys/disk.h>
+#include <sys/statvfs.h>
+#define statvfs64 statvfs
+#define O_LARGEFILE 0
+#else
 #include <sys/sysmacros.h>
+#endif
 #include <dirent.h>
 #include <signal.h>
 #include <pkginfo.h>

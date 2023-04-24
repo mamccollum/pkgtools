@@ -51,7 +51,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <assert.h>
+#ifdef __APPLE__
+#include <sys/wait.h>
+#else
 #include <wait.h>
+#endif
 
 /*
  * libspmi includes

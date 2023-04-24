@@ -38,7 +38,11 @@
 
 #include <stdio.h>
 #include <time.h>
+#ifndef __APPLE__
 #include <wait.h>
+#else
+#include <sys/wait.h>
+#endif
 #include <stdlib.h>
 #include <unistd.h>
 #include <ulimit.h>

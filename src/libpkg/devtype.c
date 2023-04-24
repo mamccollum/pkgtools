@@ -87,7 +87,11 @@ devtype(char *alias, struct pkgdev *devp)
 		/* check for capacity */
 		if (name = devattr(alias, "capacity")) {
 			if (name[0])
+				#ifdef __APPLE__
+				devp->capacity = atol(name);
+				#else
 				devp->capacity = atoll(name);
+				#endif
 			free(name);
 		}
 		/* check for norewind device */

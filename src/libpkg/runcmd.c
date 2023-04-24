@@ -45,7 +45,11 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
+#ifdef __APPLE__
+#include <sys/wait.h>
+#else
 #include <wait.h>
+#endif /* __APPLE__ */
 #include <sys/types.h>
 #include <pkglib.h>
 #include "pkglocale.h"

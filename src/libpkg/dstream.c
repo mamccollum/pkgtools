@@ -44,7 +44,14 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/param.h>
+#ifdef __APPLE__ /* sysmacros no workie on apple :( */
+#include <sys/disk.h>
+#include <sys/statvfs.h>
+#define statvfs64 statvfs
+#define O_LARGEFILE 0
+#else
 #include <sys/sysmacros.h>
+#endif
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
