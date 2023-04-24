@@ -1,0 +1,23 @@
+name: Build on macOS
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: configure
+      working-directory: ./src
+      run: ./configure
+    - name: make
+      working-directory: ./src
+      run: make
+    - name: cleanup
+      working-directory: ./src
+      run: make mrproper
