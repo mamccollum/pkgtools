@@ -162,7 +162,7 @@ else
     PREFIX=/usr
 fi
 
-printf "Setting CCSDIR... "
+printf "Setting CCSDIR...\n"
 CCSDIR=$(pwd)/ccs
 printf "%s\n" "$CFLAGS"
 
