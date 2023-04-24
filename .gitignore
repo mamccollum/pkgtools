@@ -5,6 +5,7 @@
 *~
 mk.config
 mk.config.conf
+mk.config.head
 # THIS MUST BE CASE-SENSITIVE !!!
 Makefile
 
