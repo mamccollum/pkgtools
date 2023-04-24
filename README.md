@@ -2,11 +2,7 @@
 
 This is a fork of the Heirloom pkgtools, derived from OpenSolaris & UNIX SVR4.
 
-## Confirmed Working Systems
-
-|   OS  |   Components tested with |
-| ----- | ------------------------ |
-| Debian GNU/Linux x86_64 (11.x) | Glibc 2.31, GNU Binutils (ar, ld, gold) 2.35.2, byacc 1.9, bmake 20200710, GNU Bison 3.7.5, Clang 11.0.1 |
+See [README.d](README.d/) for OS-specific documentation & other information.
 
 ## Building
 
@@ -29,3 +25,5 @@ NOTE: To do a statically linked build instead of dynamic, edit `src/mk.config.he
 
 
 There is an example package in `example-pkg`, along with scripts that have comments on how to compile.
+
+Report bugs to the [issue tracker](https://github.com/mamccollum/pkgtools/issues).

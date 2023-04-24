@@ -5,7 +5,14 @@ printf "### CONFIGURE SCRIPT FOR PKGTOOLS
 ### All rights reserved.
 
 "
-
+# Check for system via `uname -s`
+printf "[  OS  ] Checking for OS... "
+case "$(uname -s)" in
+    Linux*)     printf "Linux\n"; cp mk.config.head.unix mk.config.head;;
+    Darwin*)    printf "macOS/Darwin\n"; cp mk.config.head.darwin mk.config.head;;
+    FreeBSD*)   printf "FreeBSD\n"; cp mk.config.head.fbsd mk.config.head. ;;
+    *)          printf "Unknown system. Defaulting to generic Unix...\n";;
+esac
 
 printf "[ MAKE ] Checking for make... "
 which $MAKE > /dev/null 2>&1; MAKE_CUSTOM=$?
@@ -158,8 +165,8 @@ if [ "$PREF" != '' ]; then
 elif [ "$PREFIX" != '' ]; then
     printf '%s\n' "$PREFIX"
 else
-    printf '%s\n' "/usr"
-    PREFIX=/usr
+    printf '%s\n' "/usr/local"
+    PREFIX=/usr/local
 fi
 
 printf "Setting CCSDIR...\n"

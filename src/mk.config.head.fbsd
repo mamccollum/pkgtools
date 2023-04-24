@@ -1,10 +1,10 @@
 SHELL = /bin/sh
 VAR=/var
 CFLAGS = -O
-LDFLAGS=
+LDFLAGS=-L/usr/local/opt/openssl@3/lib -lintl
 # For Mac: LDFLAGS=-L/usr/local/opt/openssl@3/lib -lintl
 CCSLDFLAGS=
-CPPFLAGS=-D_GNU_SOURCE -std=c89
+CPPFLAGS=-D_GNU_SOURCE -std=c89 -I/usr/local/opt/openssl@3/include
 # For Mac: CPPFLAGS=-D_GNU_SOURCE -std=c89 -I/usr/local/opt/openssl@3/include
 STRIP=strip -s -R .comment -R .note
 LNS = ln -s
