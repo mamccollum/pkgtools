@@ -2,4 +2,4 @@
 
 Gettext is not installed by default on MacOS/Darwin. You can install it with [Homebrew](https://brew.sh/). 
 
-macOS is currently not supported, though work is underway.
+macOS IS supported. The configure file should automatically detect the XNU kernel and use the right configuration for it.
