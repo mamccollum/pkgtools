@@ -49,3 +49,13 @@ src/ccs
 
 # etc
 .vscode/
+
+# example pkg
+example-pkg/root/usr/bin/example
+example-pkg/src/example
+example-pkg/root/sample.pkg
+example-pkg/root/sample/reloc/usr/bin/example
+example-pkg/root/prototype
+example-pkg/root/sample/pkginfo
+example-pkg/root/sample/pkgmap
+example-pkg/sample.pkg
