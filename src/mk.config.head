@@ -1,9 +1,11 @@
 SHELL = /bin/sh
 VAR=/var
 CFLAGS = -O
-LDFLAGS=-L/usr/local/opt/openssl@3/lib -lintl
+LDFLAGS=
+# For Mac: LDFLAGS=-L/usr/local/opt/openssl@3/lib -lintl
 CCSLDFLAGS=
-CPPFLAGS=-D_GNU_SOURCE -std=c89 -I/usr/local/opt/openssl@3/include
+CPPFLAGS=-D_GNU_SOURCE -std=c89
+# For Mac: CPPFLAGS=-D_GNU_SOURCE -std=c89 -I/usr/local/opt/openssl@3/include
 STRIP=strip -s -R .comment -R .note
 LNS = ln -s
 # Where to place binaries.
