@@ -19,3 +19,6 @@ jobs:
     - name: make
       working-directory: ./src
       run: make
+    - name: cleanup
+      working-directory: ./src
+      run: make mrproper
