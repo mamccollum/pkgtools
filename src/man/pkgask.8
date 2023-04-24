@@ -20,10 +20,10 @@
 .\"  Copyright 1989 AT&T Copyright (c) 1998, Sun Microsystems, Inc. All Rights Reserved
 .\" Portions Copyright (c) 2007 Gunnar Ritter, Freiburg i. Br., Germany
 .\"
-.\" Sccsid @(#)pkgask.1m	1.8 (gritter) 2/25/07
+.\" Sccsid @(#)pkgask.8	1.8 (gritter) 2/25/07
 .\"
-.\" from OpenSolaris pkgask 1M "6 Apr 2005" "SunOS 5.11" "System Administration Commands"
-.TH PKGASK 1M "2/25/07" "Heirloom Packaging Tools" "System Administration Commands"
+.\" from OpenSolaris pkgask 8 "6 Apr 2005" "SunOS 5.11" "System Administration Commands"
+.TH PKGASK 8 "2/25/07" "Heirloom Packaging Tools" "System Administration Commands"
 .SH NAME
 pkgask \- stores answers to a request script
 .SH SYNOPSIS
@@ -66,7 +66,7 @@ Identify a file or directory which should be created to contain the responses to
 The name must be a full pathname.
 The file, or directory of files, can later be used as input
 to the
-.IR pkgadd (1M)
+.IR pkgadd (8)
 command.
 .TP
 \fB\fIpkginst\fR
@@ -78,22 +78,22 @@ The token \fBall\fR may be used to refer to all packages available on the source
 .IR pkgparam (1),
 .IR pkgproto (1),
 .IR pkgtrans (1),
-.IR installf (1M),
-.IR pkgadd (1M),
-.IR pkgchk (1M),
-.IR pkgrm (1M),
-.IR removef (1M)
+.IR installf (8),
+.IR pkgadd (8),
+.IR pkgchk (8),
+.IR pkgrm (8),
+.IR removef (8)
 .SH NOTES
 The \fB\-r\fR option can be used to indicate a directory name as well as a filename.
 The directory name is used to create numerous response files, each sharing the name of the package with which it should be associated.
 This would be used, for example, when you will be adding multiple interactive
 packages with one invocation of
-.IR pkgadd (1M).
+.IR pkgadd (8).
 Each package would need a response file.
 To create multiple response files with the same name as the package instance, name the directory in which
 the files should be created and supply multiple instance names with the \fBpkgask\fR command.
 When installing the packages, you will be able to identify this directory to the
-.IR pkgadd (1M)
+.IR pkgadd (8)
 command.
 .ig
 .PP

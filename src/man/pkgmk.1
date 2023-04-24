@@ -42,7 +42,7 @@ pkgmk \- produce an installable package
 .SH DESCRIPTION
 The \fBpkgmk\fR utility produces
 an installable package to be used as input to the
-.IR pkgadd (1M)
+.IR pkgadd (8)
 command.
 The package contents will be in directory structure format.
 .PP
@@ -124,7 +124,7 @@ The default \fIprototype\fR filename is [\fBPp\fR]\fBrototype\fR.
 Specifies the maximum size in 512 byte blocks of the output device as \fBlimit\fR.
 By default,
 if the output file is a directory or a mountable device, \fBpkgmk\fR will employ the
-.IR df (1M)
+.IR df (8)
 command to dynamically calculate the amount of available space on the output device.
 This option is useful in conjunction with
 .IR pkgtrans (1)
@@ -167,8 +167,8 @@ In the C-Shell, "*" must be surrounded by single quotes (\fB'\fR) or preceded by
 .IR pkgproto (1),
 .IR pkgtrans (1),
 .IR uname (1),
-.IR df (1M),
-.IR pkgadd (1M),
+.IR df (8),
+.IR pkgadd (8),
 .IR pkginfo (5),
 .IR pkgmap (5),
 .IR prototype (5)

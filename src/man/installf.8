@@ -20,10 +20,10 @@
 .\"  Copyright 1989 AT&T Copyright (c) 2006, Sun Microsystems, Inc. All Rights Reserved
 .\" Portions Copyright (c) 2007 Gunnar Ritter, Freiburg i. Br., Germany
 .\"
-.\" Sccsid @(#)installf.1m	1.8 (gritter) 2/25/07
+.\" Sccsid @(#)installf.8	1.8 (gritter) 2/25/07
 .\"
-.\" from OpenSolaris installf 1M "16 May 2006" "SunOS 5.11" "System Administration Commands"
-.TH INSTALLF 1M "2/25/07" "Heirloom Packaging Tools" "System Administration Commands"
+.\" from OpenSolaris installf 8 "16 May 2006" "SunOS 5.11" "System Administration Commands"
+.TH INSTALLF 8 "2/25/07" "Heirloom Packaging Tools" "System Administration Commands"
 .SH NAME
 installf \- add a file to the software installation database
 .SH SYNOPSIS
@@ -101,9 +101,9 @@ The \fIroot_path\fR can be specified when installing to a client from a server (
 .IP
 \fBinstallf\fR inherits the value of the PKG_INSTALL_ROOT environment variable.
 (See ENVIRONMENT VARIABLES, below.) If PKG_INSTALL_ROOT is set, such as when the \fB\-R\fR option is used with
-.IR pkgadd (1M)
+.IR pkgadd (8)
 or
-.IR pkgrm (1M),
+.IR pkgrm (8),
 there is no need to use the \fBinstallf\fR \fB\-R\fR option.
 .ig
 .IP
@@ -224,9 +224,9 @@ installf \fR\fB\-f\fR\fB $PKGINST || exit 2\fR
 .SH ENVIRONMENT VARIABLES
 \fBinstallf\fR inherits the value of the following environment variable.
 This variable is set when
-.IR pkgadd (1M)
+.IR pkgadd (8)
 or
-.IR pkgrm (1M)
+.IR pkgrm (8)
 is invoked with the \fB\-R\fR option.
 .TP
 .B PKG_INSTALL_ROOT
@@ -240,11 +240,11 @@ If not present, the default system path of \fB/\fR is used.
 .IR pkgparam (1),
 .IR pkgproto (1),
 .IR pkgtrans (1),
-.IR pkgadd (1M),
-.IR pkgask (1M),
-.IR pkgchk (1M),
-.IR pkgrm (1M),
-.IR removef (1M),
+.IR pkgadd (8),
+.IR pkgask (8),
+.IR pkgchk (8),
+.IR pkgrm (8),
+.IR removef (8),
 .IR pkgmap (5)
 .SH NOTES
 When \fIftype\fR is specified, all applicable fields, as shown below, must be defined:

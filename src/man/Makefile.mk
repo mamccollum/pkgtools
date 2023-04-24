@@ -20,13 +20,13 @@ install: all
 	$(INSTALL) -c -m 644 pkgparam.1 $(ROOT)$(MANDIR)/man1/pkgparam.1
 	$(INSTALL) -c -m 644 pkgproto.1 $(ROOT)$(MANDIR)/man1/pkgproto.1
 	$(INSTALL) -c -m 644 pkgtrans.1 $(ROOT)$(MANDIR)/man1/pkgtrans.1
-	test -d $(ROOT)$(MANDIR)/man1m || mkdir -p $(ROOT)$(MANDIR)/man1m
-	$(INSTALL) -c -m 644 installf.1m $(ROOT)$(MANDIR)/man1m/installf.1m
-	$(INSTALL) -c -m 644 pkgadd.1m $(ROOT)$(MANDIR)/man1m/pkgadd.1m
-	$(INSTALL) -c -m 644 pkgask.1m $(ROOT)$(MANDIR)/man1m/pkgask.1m
-	$(INSTALL) -c -m 644 pkgchk.1m $(ROOT)$(MANDIR)/man1m/pkgchk.1m
-	$(INSTALL) -c -m 644 pkgrm.1m $(ROOT)$(MANDIR)/man1m/pkgrm.1m
-	$(INSTALL) -c -m 644 removef.1m $(ROOT)$(MANDIR)/man1m/removef.1m
+	test -d $(ROOT)$(MANDIR)/man8 || mkdir -p $(ROOT)$(MANDIR)/man8
+	$(INSTALL) -c -m 644 installf.8 $(ROOT)$(MANDIR)/man8/installf.8
+	$(INSTALL) -c -m 644 pkgadd.8 $(ROOT)$(MANDIR)/man8/pkgadd.8
+	$(INSTALL) -c -m 644 pkgask.8 $(ROOT)$(MANDIR)/man8/pkgask.8
+	$(INSTALL) -c -m 644 pkgchk.8 $(ROOT)$(MANDIR)/man8/pkgchk.8
+	$(INSTALL) -c -m 644 pkgrm.8 $(ROOT)$(MANDIR)/man8/pkgrm.8
+	$(INSTALL) -c -m 644 removef.8 $(ROOT)$(MANDIR)/man8/removef.8
 	test -d $(ROOT)$(MANDIR)/man5 || mkdir -p $(ROOT)$(MANDIR)/man5
 	$(INSTALL) -c -m 644 depend.5 $(ROOT)$(MANDIR)/man5/depend.5
 	$(INSTALL) -c -m 644 pkginfo.5 $(ROOT)$(MANDIR)/man5/pkginfo.5

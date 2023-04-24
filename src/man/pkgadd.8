@@ -21,10 +21,10 @@
 .\" Copyright 1989 AT&T
 .\" Portions Copyright (c) 2007 Gunnar Ritter, Freiburg i. Br., Germany
 .\"
-.\" Sccsid @(#)pkgadd.1m	1.9 (gritter) 2/26/07
+.\" Sccsid @(#)pkgadd.8	1.9 (gritter) 2/26/07
 .\"
-.\" from OpenSolaris pkgadd 1M "26 Jul 2006" "SunOS 5.11" "System Administration Commands"
-.TH PKGADD 1M "2/26/07" "Heirloom Packaging Tools" "System Administration Commands"
+.\" from OpenSolaris pkgadd 8 "26 Jul 2006" "SunOS 5.11" "System Administration Commands"
+.TH PKGADD 8 "2/26/07" "Heirloom Packaging Tools" "System Administration Commands"
 .SH NAME
 pkgadd \- transfer software packages to the system
 .SH SYNOPSIS
@@ -92,7 +92,7 @@ In the current release, the default user is \fBnoaccess\fR.
 When running \fBpkgadd\fR in the global zone (see
 .IR zones (5)),
 a package that contains a request script (see
-.IR pkgask (1M))
+.IR pkgask (8))
 is added only to the global zone.
 The package is not propagated to any current or yet-to-be-installed non-global zone.
 This behavior mimics the effect of the \fB\-G\fR option, described below.
@@ -143,7 +143,7 @@ See \fBPASS PHRASE ARGUMENTS\fR for more information about the format of this op
 .TP
 \fB\-r\fR \fIresponse\fR
 Identify a file or directory which contains output from a previous
-.IR pkgask (1M)
+.IR pkgask (8)
 session.
 This file supplies the interaction responses that would be requested by the package in interactive mode.
 \fIresponse\fR must be a full pathname.
@@ -368,11 +368,11 @@ Location where \fBpkgadd\fR logs an instance of software installation.
 .IR pkgparam (1),
 .IR pkgproto (1),
 .IR pkgtrans (1),
-.IR installf (1M),
-.IR pkgask (1M),
-.IR pkgchk (1M),
-.IR pkgrm (1M),
-.IR removef (1M),
+.IR installf (8),
+.IR pkgask (8),
+.IR pkgchk (8),
+.IR pkgrm (8),
+.IR removef (8),
 .IR pkginfo (5)
 .ig
 .br

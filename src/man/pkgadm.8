@@ -20,10 +20,10 @@
 .\" Copyright (c) 2003, Sun Microsystems, Inc. All Rights Reserved
 .\" Portions Copyright (c) 2007 Gunnar Ritter, Freiburg i. Br., Germany
 .\"
-.\" Sccsid @(#)pkgadm.1m	1.8 (gritter) 2/25/07
+.\" Sccsid @(#)pkgadm.8	1.8 (gritter) 2/25/07
 .\"
-.\" from OpenSolaris pkgadm 1M "6 Apr 2005" "SunOS 5.11" "System Administration Commands"
-.TH PKGADM 1M "2/25/07" "Heirloom Packaging Tools" "System Administration Commands"
+.\" from OpenSolaris pkgadm 8 "6 Apr 2005" "SunOS 5.11" "System Administration Commands"
+.TH PKGADM 8 "2/25/07" "Heirloom Packaging Tools" "System Administration Commands"
 .SH NAME
 pkgadm \- manage packaging and patching system
 .SH SYNOPSIS
@@ -150,7 +150,7 @@ Standard out is the default.
 \fB\-P\fR \fIpassarg\fR
 Password retrieval method to use to decrypt keystore specified with \fB\-k\fR, if required.
 See \fBPASS PHRASE ARGUMENTS\fR in
-.IR pkgadd (1M)
+.IR pkgadd (8)
 for more information about the format of this option's argument.
 \fBconsole\fR is the default.
 .TP
@@ -209,7 +209,7 @@ or chain certificate.
 Subsequent \fBpkgcert\fR or other package tool commands must use this same alias to refer to the entity.
 .SH KEYSTORE PASSWORDS
 See the
-.IR pkgadd (1M)
+.IR pkgadd (8)
 man page for a description of the passwords supplied to the \fBpkgadm\fR utility.
 ..
 .SH EXAMPLES
@@ -249,10 +249,10 @@ pkgadm listcert
 .IR pkgparam (1),
 .IR pkgproto (1),
 .IR pkgtrans (1),
-.IR installf (1M),
-.IR pkgadd (1M),
-.IR pkgask (1M),
-.IR pkgrm (1M),
-.IR removef (1M),
+.IR installf (8),
+.IR pkgadd (8),
+.IR pkgask (8),
+.IR pkgrm (8),
+.IR removef (8),
 .IR admin (5),
 .IR pkginfo (5)
