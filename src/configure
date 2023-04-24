@@ -164,6 +164,7 @@ fi
 
 printf "Setting CCSDIR...\n"
 CCSDIR=$(pwd)/ccs
+mkdir -p $CCSDIR/lib
 printf "%s\n" "$CFLAGS"
 
 echo "### configure results
