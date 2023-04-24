@@ -61,6 +61,10 @@ extern char	*pkginst;
 
 extern struct cfent	**eptlist;
 extern int	eptnum;
+/* Fix eptnum being unreferenced on Darwin */
+#if defined(__APPLE__)
+int eptnum;
+#endif
 
 int
 delmap(int flag, char *pkginst)

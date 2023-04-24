@@ -103,7 +103,7 @@
  */
 #define	ADDL_TBL_BUF 1024
 
-int eptnum;
+static int eptnum;
 struct cfent **eptlist;
 
 /* private globals */
