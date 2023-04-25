@@ -61,8 +61,8 @@ extern char	*pkginst;
 
 extern struct cfent	**eptlist;
 extern int	eptnum;
-/* Fix eptnum being unreferenced on Darwin */
-#if defined(__APPLE__)
+/* Fix eptnum being unreferenced on Darwin or BSD */
+#if defined(__APPLE__) || defined(__FreeBSD__)
 int eptnum;
 #endif
 

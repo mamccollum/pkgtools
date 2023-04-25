@@ -54,7 +54,7 @@
 #include "libinst.h"
 #include "pkginstall.h"
 
-#ifdef __APPLE__
+#if defined (__APPLE__) || defined (__FreeBSD__)
 #define statvfs64 statvfs
 #endif
 

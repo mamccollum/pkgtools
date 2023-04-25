@@ -42,6 +42,9 @@
 #ifndef __APPLE__
 #include <malloc.h>
 #endif
+#ifdef __FreeBSD__
+#include <sys/malloc.h>
+#endif
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
@@ -51,7 +54,7 @@
 #include <sys/param.h>
 #include <ctype.h>
 #include <sys/mman.h>
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/disk.h>
 #define statvfs64 statvfs
 #define fsblkcnt64_t fsblkcnt_t

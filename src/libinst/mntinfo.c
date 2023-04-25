@@ -42,7 +42,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/wait.h>
 #else
 #include <wait.h>
@@ -50,6 +50,9 @@
 #include <signal.h>
 #ifndef __APPLE__
 #include <malloc.h>
+#endif
+#ifdef __FreeBSD__
+#include <sys/malloc.h>
 #endif
 #include <sys/types.h>
 #include <sys/mount.h>

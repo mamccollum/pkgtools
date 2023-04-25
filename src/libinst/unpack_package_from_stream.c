@@ -38,7 +38,7 @@
 
 #include <stdio.h>
 #include <time.h>
-#ifndef __APPLE__
+#if !defined(__APPLE__) && !defined(__FreeBSD__)
 #include <wait.h>
 #else
 #include <sys/wait.h>

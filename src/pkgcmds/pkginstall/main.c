@@ -37,7 +37,7 @@
 
 #include <stdio.h>
 #include <time.h>
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/wait.h>
 #else
 #include <wait.h>
@@ -72,7 +72,7 @@
 #include <messages.h>
 #include "pkginstall.h"
 
-#ifdef __APPLE__
+#if defined (__APPLE__) || defined (__FreeBSD__)
 #define statvfs64 statvfs
 #endif
 

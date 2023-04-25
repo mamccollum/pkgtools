@@ -44,10 +44,10 @@
 #include <string.h>
 #include <errno.h>
 #include <assert.h>
-#ifndef __APPLE__
-#include <wait.h>
-#else
+#if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/wait.h>
+#else
+#include <wait.h>
 #endif
 #include <limits.h>
 #include <dirent.h>
