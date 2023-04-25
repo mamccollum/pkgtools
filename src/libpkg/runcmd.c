@@ -45,11 +45,11 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/wait.h>
 #else
 #include <wait.h>
-#endif /* __APPLE__ */
+#endif
 #include <sys/types.h>
 #include <pkglib.h>
 #include "pkglocale.h"

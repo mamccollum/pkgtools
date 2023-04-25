@@ -44,7 +44,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/param.h>
-#ifdef __APPLE__ /* sysmacros no workie on apple :( */
+#if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/disk.h>
 #include <sys/statvfs.h>
 #define statvfs64 statvfs

@@ -108,7 +108,7 @@
 
 static int test_if_blk(char *, dev_t);
 static int test_if_raw(char *, dev_t);
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__FreeBSD__)
 static char *getblkcomplete(char *, struct stat *);
 static char *getrawcomplete(char *, struct stat *);
 #else
@@ -169,14 +169,14 @@ getfullname(char *path)
 static int
 test_if_blk(char *new_path, dev_t raw_dev)
 {
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	struct stat	buf;
 	#else
 	struct stat64	buf;
 	#endif
 
 	/* check if we got a char special file */
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	if (stat(new_path, &buf) != 0)
 	#else
 	if (stat64(new_path, &buf) != 0)
@@ -198,14 +198,14 @@ test_if_blk(char *new_path, dev_t raw_dev)
 static int
 test_if_raw(char *new_path, dev_t blk_dev)
 {
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	struct stat	buf;
 	#else
 	struct stat64	buf;
 	#endif
 
 	/* check if we got a char special file */
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	if (stat(new_path, &buf) != 0)
 	#else
 	if (stat64(new_path, &buf) != 0)
@@ -226,7 +226,7 @@ test_if_raw(char *new_path, dev_t blk_dev)
  */
 
 static char *
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__FreeBSD__)
 getblkcomplete(char *cp, struct stat *dat)
 #else
 getblkcomplete(char *cp, struct stat64 *dat)
@@ -283,7 +283,7 @@ getblkcomplete(char *cp, struct stat64 *dat)
  */
 
 static char *
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__FreeBSD__)
 getrawcomplete(char *cp, struct stat *dat)
 #else
 getrawcomplete(char *cp, struct stat64 *dat)
@@ -377,7 +377,7 @@ getvfsspecial(char *path, int raw_special)
 char *
 getfullblkname(char *cp)
 {
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	struct stat	buf;
 	#else
 	struct stat64	buf;
@@ -398,7 +398,7 @@ getfullblkname(char *cp)
 	if (*cp == '\0')
 		return (cp);
 
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	if (stat(cp, &buf) != 0) {
 	#else
 	if (stat64(cp, &buf) != 0) {
@@ -469,7 +469,7 @@ getfullblkname(char *cp)
 char *
 getfullrawname(char *cp)
 {
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	struct stat	buf;
 	#else
 	struct stat64	buf;
@@ -490,7 +490,7 @@ getfullrawname(char *cp)
 	if (*cp == '\0')
 		return (cp);
 
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	if (stat(cp, &buf) != 0) {
 	#else
 	if (stat64(cp, &buf) != 0) {

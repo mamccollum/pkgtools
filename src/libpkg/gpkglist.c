@@ -133,7 +133,7 @@ gpkglist(char *dir, char **pkg, char **catg)
 
 	info.pkginst = NULL; /* initialize for memory handling */
 	if (pkginfo(&info, "all", NULL, NULL)) {
-		#ifdef __APPLE__
+		#ifndef __GLIBC__
 		#define ENOPKG 100
 		#endif
 		errno = ENOPKG; /* contains no valid packages */

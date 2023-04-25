@@ -135,11 +135,11 @@ opennewdgrptab(char **pname)	 /* A(ptr to temp filename's path) */
 	char   *p;			/* Ptr to last '/' in dgrptab name */
 	int    fd;			/* Opened file descriptor */
 	FILE   *fp;			/* Opened file pointer */
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__) 
 	struct stat	sbuf;		/* stat buf for old dgrptab file */
 	#else
 	struct stat64	sbuf;		/* stat buf for old dgrptab file */
-	#endif /* __APPLE__ */
+	#endif
 
 	/* Initializations */
 	fp = NULL;
@@ -156,7 +156,7 @@ opennewdgrptab(char **pname)	 /* A(ptr to temp filename's path) */
 	    if ((fd = open(oldname, O_WRONLY)) == -1)
 		return (NULL);
 
-		#ifdef __APPLE__
+		#if defined(__APPLE__) || defined(__FreeBSD__)
 		if (fstat(fd, &sbuf) == -1) {
 		#else
 	    if (fstat64(fd, &sbuf) == -1) {

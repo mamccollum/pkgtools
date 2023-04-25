@@ -177,8 +177,7 @@ ckpath_val(char *path, int pflags)
 		_errstr = E_ABSOLUTE;
 		return (1);
 	}
-	#ifdef __APPLE__
-	/* fix incompatible pointer types stat64 -> stat */
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	if (stat(path, &status)) {
 	#else
 	if (stat64(path, &status)) {

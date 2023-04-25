@@ -286,7 +286,7 @@ static int
 svr4info(struct pkginfo *info, char *pkginst, char *ckvers)
 {
 	static DIR *pdirfp;
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	struct stat status;
 	#else
 	struct stat64 status;
@@ -308,7 +308,7 @@ svr4info(struct pkginfo *info, char *pkginst, char *ckvers)
 
 	/* look in /usr/options direcotry for 'name' file */
 	(void) sprintf(path, "%s/%s.name", get_PKGOLD(), temp);
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	if (lstat(path, &status)) {
 	#else
 	if (lstat64(path, &status)) {
@@ -380,7 +380,7 @@ fpkginst(char *pkg, ...)
 {
 	static char pkginst[PKGSIZ+1];
 	static DIR *pdirfp;
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	struct dirent *dp;
 	#else
 	struct dirent64 *dp;
@@ -411,8 +411,11 @@ fpkginst(char *pkg, ...)
 		errno = EACCES;
 		return (NULL);
 	}
-
+	#if defined(__APPLE__) || defined(__FreeBSD__)
+	while ((dp = readdir(pdirfp)) != NULL) {
+	#else
 	while ((dp = readdir64(pdirfp)) != NULL) {
+	#endif
 		if (dp->d_name[0] == '.')
 			continue;
 
@@ -453,10 +456,11 @@ svr4inst(char *pkg)
 {
 	static char pkginst[PKGSIZ];
 	static DIR *pdirfp;
-	struct dirent64 *dp;
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
+	struct dirent *dp;
 	struct stat status;	/* file status buffer */
 	#else
+	struct dirent64 *dp;
 	struct stat64	status;	/* file status buffer */
 	#endif
 	char	*pt;
@@ -469,11 +473,14 @@ svr4inst(char *pkg)
 		}
 		return (NULL);
 	}
-
 	if (!pdirfp && ((pdirfp = opendir(get_PKGOLD())) == NULL))
 		return (NULL);
-
+	
+	#if defined(__APPLE__) || defined(__FreeBSD__)
+	while ((dp = readdir(pdirfp)) != NULL) {
+	#else	
 	while ((dp = readdir64(pdirfp)) != NULL) {
+	#endif
 		if (dp->d_name[0] == '.')
 			continue;
 		pt = strchr(dp->d_name, '.');
@@ -482,7 +489,7 @@ svr4inst(char *pkg)
 			if (pkgnmchk(dp->d_name, pkg, 1))
 				continue;
 			(void) sprintf(path, "%s/%s", get_PKGOLD(), dp->d_name);
-			#ifdef __APPLE__
+			#if defined(__APPLE__) || defined(__FreeBSD__)
 			if (lstat(path, &status))
 			#else
 			if (lstat64(path, &status))

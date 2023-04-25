@@ -41,7 +41,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/wait.h>
 #else
 #include <wait.h>

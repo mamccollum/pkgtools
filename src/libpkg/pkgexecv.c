@@ -41,12 +41,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/wait.h>
 #include <spawn.h>
 #else
 #include <wait.h>
-#endif /* __APPLE__ */
+#endif
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>

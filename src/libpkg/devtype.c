@@ -87,7 +87,7 @@ devtype(char *alias, struct pkgdev *devp)
 		/* check for capacity */
 		if ((name = devattr(alias, "capacity"))) {
 			if (name[0])
-				#ifdef __APPLE__
+				#if defined(__APPLE__) || defined(__FreeBSD__) 
 				devp->capacity = atol(name);
 				#else
 				devp->capacity = atoll(name);

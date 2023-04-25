@@ -877,7 +877,7 @@ pkgGetPackageList(char ***r_pkgList, char **a_argv, int a_optind,
 	/* handle error from gpkglist */
 
 	switch (errno) {
-		#ifdef __APPLE__
+		#if defined(__APPLE__) || defined(__FreeBSD__)
 		#define ENOPKG 100
 		#endif
 	    case ENOPKG:	/* no packages */

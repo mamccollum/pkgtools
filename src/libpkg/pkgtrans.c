@@ -50,7 +50,7 @@
 #include <sys/param.h>
 #include <sys/stat.h>
 #include <sys/statvfs.h>
-#ifdef __APPLE__ /* sysmacros no workie on apple :( */
+#if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/disk.h>
 #include <sys/statvfs.h>
 #define statvfs64 statvfs

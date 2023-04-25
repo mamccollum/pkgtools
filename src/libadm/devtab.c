@@ -121,7 +121,7 @@ static	int		dtabrecnum = 0;
  */
 
 static int
-#if defined (__APPLE__)
+#if defined (__APPLE__) || defined (__FreeBSD__)
 samedev(struct stat x, struct stat y)
 #else
 samedev(struct stat64 x, struct stat64 y)
@@ -923,12 +923,12 @@ _getdevrec(char	*device)			/* The device to search for */
 	/*
 	 *  Automatic data
 	 */
-	#ifndef __APPLE__
-	struct stat64		devstatbuf;	/* Stat struct, <device> */
-	struct stat64		tblstatbuf;	/* Stat struct, tbl entry */
-	#else
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	struct stat		devstatbuf;	/* Stat struct, <device> */
 	struct stat		tblstatbuf;	/* Stat struct, tbl entry */
+	#else
+	struct stat64		devstatbuf;	/* Stat struct, <device> */
+	struct stat64		tblstatbuf;	/* Stat struct, tbl entry */
 	#endif
 	struct devtabent	*devrec = NULL;	/* Pointer to current record */
 	int			found;		/* TRUE if record found */
@@ -964,7 +964,7 @@ _getdevrec(char	*device)			/* The device to search for */
 		_setdevtab();
 
 		/*  Status the file <device>.  If fails, invalid device */
-		#ifdef __APPLE__
+		#if defined(__APPLE__) || defined(__FreeBSD__)
 		if (stat(device, &devstatbuf) != 0) errno = ENODEV;
 		#else
 		if (stat64(device, &devstatbuf) != 0) errno = ENODEV;
@@ -983,7 +983,7 @@ _getdevrec(char	*device)			/* The device to search for */
 			while (!found && (devrec = _getdevtabent())) {
 			    if (!devrec->comment &&
 				(devrec->cdevice != NULL)) {
-				#ifdef __APPLE__
+				#if defined(__APPLE__) || defined(__FreeBSD__)
 				if ((stat(devrec->cdevice, &tblstatbuf) == 0))
 				#else
 				if ((stat64(devrec->cdevice, &tblstatbuf) == 0))
@@ -1010,7 +1010,7 @@ _getdevrec(char	*device)			/* The device to search for */
 		    while (!found && (devrec = _getdevtabent())) {
 			if (!devrec->comment &&
 			    (devrec->bdevice != NULL)) {
-			    #ifdef __APPLE__
+			    #if defined(__APPLE__) || defined(__FreeBSD__)
 			    if ((stat(devrec->bdevice, &tblstatbuf) == 0)) {
 			    #else
 			    if ((stat64(devrec->bdevice, &tblstatbuf) == 0)) {
@@ -1039,7 +1039,7 @@ _getdevrec(char	*device)			/* The device to search for */
 			while (!found && (devrec = _getdevtabent())) {
 			    if (!devrec->comment &&
 				(devrec->pathname != NULL)) {
-					#ifdef __APPLE__
+					#if defined(__APPLE__) || defined(__FreeBSD__)
 					if (stat(devrec->pathname,
 					    &tblstatbuf) == 0) {
 					#else

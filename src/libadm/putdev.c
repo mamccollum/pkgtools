@@ -172,11 +172,11 @@ opennewdevtab(char  **pname)		/* A(ptr to temp filename's path) */
 	char   *p;			/* Ptr to last '/' in devtab name */
 	int    fd;			/* Opened file descriptor */
 	FILE   *fp;			/* Opened file pointer */
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	struct stat	sbuf;		/* stat buf for old devtab file */
 	#else
 	struct stat64	sbuf;		/* stat buf for old devtab file */
-	#endif /* __APPLE__ */
+	#endif
 
 	fp = NULL;
 	if ((oldname = _devtabpath())) {
@@ -190,7 +190,7 @@ opennewdevtab(char  **pname)		/* A(ptr to temp filename's path) */
 	    if ((fd = open(oldname, O_WRONLY)) == -1)
 		return (NULL);
 
-		#ifdef __APPLE__
+		#if defined(__APPLE__) || defined(__FreeBSD__)
 		if ((fstat(fd, &sbuf) == -1)) {
 		#else
 	    if (ftat64(fd, &sbuf) == -1) {

@@ -1475,7 +1475,7 @@ get_fs_entry(short n)
 #undef	getmntent
 #undef	MNTTAB
 /* Apple & BSDs */
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/mntent.h>
 #else
 #include <mntent.h>
@@ -1484,8 +1484,8 @@ get_fs_entry(short n)
 static int
 _getmntent(FILE *fp, struct mnttab *tp)
 {
-	#ifdef __APPLE__
-	/* use getmntinfo() on Darwin */
+	#if defined(__APPLE__) || defined(__FreeBSD__)
+	/* use getmntinfo() on Darwin and BSD */
 	struct statfs *mntbufp;
 	int i, mntsize;
 

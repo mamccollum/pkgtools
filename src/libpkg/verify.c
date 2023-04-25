@@ -44,7 +44,7 @@
 #include <utime.h>
 #ifndef __APPLE__
 #include <malloc.h>
-#endif /* !__APPLE__ */
+#endif
 #include <sys/types.h>
 #include <sys/param.h>
 #include <sys/stat.h>
@@ -61,7 +61,7 @@
 #ifdef __sun
 #include <sys/mkdev.h>
 #endif
-#ifdef __APPLE__ /* sysmacros no workie on apple :( */
+#if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/disk.h>
 #include <sys/statvfs.h>
 #define statvfs64 statvfs

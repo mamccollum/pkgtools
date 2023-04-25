@@ -393,9 +393,9 @@ ask_basedir(char *path, int nointeract)
 		return (5);
 	} else {
 		path[0] = '\0';
-		if (n = ckpath(path, P_ABSOLUTE|P_DIR|P_WRITE,
+		if ((n = ckpath(path, P_ABSOLUTE|P_DIR|P_WRITE,
 		    basedir, NULL, gettext(MSG_HELP),
-		    gettext(MSG_PROMPT)))
+		    gettext(MSG_PROMPT))))
 			return (n);	/* FAIL */
 		orig_basedir =
 		    expand_path(path);
@@ -565,7 +565,7 @@ mkpath(char *p)
 
 	pt = (*p == '/') ? p+1 : p;
 	do {
-		if (pt = strchr(pt, '/')) {
+		if ((pt = strchr(pt, '/'))) {
 			*pt = '\0';
 		}
 		if ((access(p, F_OK) != 0) && (mkdir(p, 0755) != 0)) {
