@@ -172,10 +172,14 @@ opennewdevtab(char  **pname)		/* A(ptr to temp filename's path) */
 	char   *p;			/* Ptr to last '/' in devtab name */
 	int    fd;			/* Opened file descriptor */
 	FILE   *fp;			/* Opened file pointer */
+	#ifdef __APPLE__
+	struct stat	sbuf;		/* stat buf for old devtab file */
+	#else
 	struct stat64	sbuf;		/* stat buf for old devtab file */
+	#endif /* __APPLE__ */
 
 	fp = NULL;
-	if (oldname = _devtabpath()) {
+	if ((oldname = _devtabpath())) {
 	/*
 	 * It is possible for us to have sufficient permissions to create
 	 * the new file without having sufficient permissions to write the
@@ -186,17 +190,21 @@ opennewdevtab(char  **pname)		/* A(ptr to temp filename's path) */
 	    if ((fd = open(oldname, O_WRONLY)) == -1)
 		return (NULL);
 
-	    if (fstat64(fd, &sbuf) == -1) {
+		#ifdef __APPLE__
+		if ((fstat(fd, &sbuf) == -1)) {
+		#else
+	    if (ftat64(fd, &sbuf) == -1) {
+		#endif
 		(void) close(fd);
 		return (NULL);
 	    }
 	    (void) close(fd);
 
-	    if (p = strrchr(oldname, '/')) {
+	    if ((p = strrchr(oldname, '/'))) {
 		*(p+1) = '\0';
 		dirname = oldname;
 	    } else dirname = "./";
-	    if (buf = malloc(TDTABNMLN + strlen(dirname) + 1)) {
+	    if ((buf = malloc(TDTABNMLN + strlen(dirname) + 1))) {
 
 		/*
 		 * Build the name of the temp device table and open the
@@ -204,7 +212,7 @@ opennewdevtab(char  **pname)		/* A(ptr to temp filename's path) */
 		 * of the original devtab file.
 		 */
 		(void) sprintf(buf, TDTABNM, dirname, getpid());
-		if (fp = fopen(buf, "w")) {
+		if ((fp = fopen(buf, "w"))) {
 			*pname = buf;
 			(void) fchmod(fileno(fp), sbuf.st_mode & 0777);
 			(void) fchown(fileno(fp), sbuf.st_uid, sbuf.st_gid);
@@ -279,7 +287,7 @@ mknewdevtab(char   *tempname)		/* Ptr to name of temp dev tab */
 	int	noerr;			/* FLAG, TRUE if all's well */
 
 	/* Get the device table's pathname */
-	if (devtabname = _devtabpath()) {
+	if ((devtabname = _devtabpath())) {
 
 	    /* Unlink the existing file */
 	    if (unlink(devtabname) == 0) {
@@ -451,10 +459,10 @@ mkdevtabent(
 	noerr = TRUE;
 
 	/* Get space for the structure */
-	if (devtabent = malloc(sizeof (struct devtabent))) {
+	if ((devtabent = malloc(sizeof (struct devtabent)))) {
 
 	    /* Fill in default values */
-	    if (devtabent->alias = malloc(strlen(alias)+1)) {
+	    if ((devtabent->alias = malloc(strlen(alias)+1))) {
 
 		(void) strcpy(devtabent->alias, alias);		/* alias */
 		devtabent->comment = FALSE;			/* data rec */
@@ -474,11 +482,11 @@ mkdevtabent(
 			((len = peq - *pp) > 0)) {
 
 			/* Get space for the value */
-			if (val = malloc(strlen(peq))) {
+			if ((val = malloc(strlen(peq)))) {
 			    (void) strcpy(val, peq+1);		/* Copy it */
 
 			    /* Get space for attribute name */
-			    if (name = malloc((size_t)(len + 1))) {
+			    if ((name = malloc((size_t)(len + 1)))) {
 				(void) strncpy(name, *pp, (size_t)len);
 				*(name+len) = '\0';
 
@@ -569,8 +577,8 @@ mkdevtabent(
 				    if (!found && noerr) {
 
 					/* Get space for attr/val structure */
-					if (attrval =
-					    malloc(sizeof (struct attrval))) {
+					if ((attrval =
+					    malloc(sizeof (struct attrval)))) {
 
 					    /* Fill attr/val structure */
 					    attrval->attr = name;
@@ -662,7 +670,7 @@ _putdevtabrec(
 
 	    /* Copy (escaping chars) record into temp buffer */
 	    size = (strlen(rec->attrstr)*2)+1;		/* Max rec size */
-	    if (buf = malloc(size+1)) {
+	    if ((buf = malloc(size+1))) {
 		/* Alloc space */
 		p = strcatesc(buf, rec->attrstr);	/* Copy "escaped" */
 		*(p-2) = '\n';				/* Unescape last \n */
@@ -704,7 +712,7 @@ _putdevtabrec(
 	    else size++;		/* Else make room for trailing '\n' */
 
 	    /* Alloc space for "escaped" record */
-	    if (buf = malloc(size+1)) {
+	    if ((buf = malloc(size+1))) {
 
 		/* Initializations */
 		p = buf;
@@ -799,7 +807,7 @@ _adddevtabrec(
 	/* Make sure that the alias isn't already in the table */
 	noerr = TRUE;
 	olderrno = errno;
-	if (devtabent = _getdevrec(alias)) {
+	if ((devtabent = _getdevrec(alias))) {
 
 	    /* The alias is already in the table */
 	    _freedevtabent(devtabent);		/* Free device table info */
@@ -812,7 +820,7 @@ _adddevtabrec(
 	    errno = olderrno;			/* Reset errno */
 
 	    /* Build a struct devtabent that describes the new alias */
-	    if (devtabent = mkdevtabent(alias, attrval)) {
+	    if ((devtabent = mkdevtabent(alias, attrval))) {
 
 		/* Position to the end of the existing table */
 		if (fseek(oam_devtab, 0, SEEK_END) == 0)
@@ -877,10 +885,10 @@ _moddevtabrec(
 	noerr = TRUE;
 
 	/* Get the entry to modify */
-	if (ent = _getdevrec(device)) {
+	if ((ent = _getdevrec(device))) {
 
 	    /* Build a structure describing the changes */
-	    if (chg = mkdevtabent(device, attrval)) {
+	    if ((chg = mkdevtabent(device, attrval))) {
 
 		/* If the "cdevice" field is specified, change it */
 		if (chg->cdevice) {
@@ -962,7 +970,7 @@ _moddevtabrec(
 	    if (noerr) {
 
 		/* Open the new device table */
-		if (fd = opennewdevtab(&tname)) {
+		if ((fd = opennewdevtab(&tname))) {
 
 		/*
 		 * For each entry in the existing table, write that entry
@@ -1036,8 +1044,8 @@ _rmdevtabrec(char *device)		/* Device to remove */
 	if (!lkdevtab("r", F_WRLCK))
 		return (FALSE);
 	noerr = TRUE;
-	if (rment = _getdevrec(device)) {
-	    if (fd = opennewdevtab(&tempname)) {
+	if ((rment = _getdevrec(device))) {
+	    if ((fd = opennewdevtab(&tempname))) {
 		_setdevtab();
 		while (((devtabent = _getdevtabent()) != NULL) && noerr) {
 		    if (devtabent->entryno != rment->entryno)
@@ -1129,7 +1137,7 @@ _rmdevtabattrs(
 		return (FALSE);
 
 	/* Is there a record for the requested device? */
-	if (modent = _getdevrec(device)) {
+	if ((modent = _getdevrec(device))) {
 
 	    /* Record found.  Try to modify it */
 	    nonotfounds = TRUE;
@@ -1213,12 +1221,12 @@ _rmdevtabattrs(
 			 */
 
 		    if (nonotfounds)
-			if (*notfounds = malloc(sizeof (char **)*(nattrs+1))) {
+			if ((*notfounds = malloc(sizeof (char **)*(nattrs+1)))) {
 
 			    /* List allocated -- put in the first entry */
 			    nonotfounds = FALSE;
 			    pnxt = *notfounds;
-			    if (*pnxt = malloc(strlen(*pp)+1)) {
+			    if ((*pnxt = malloc(strlen(*pp)+1))) {
 				errno = EINVAL;
 				noerr = FALSE;
 				(void) strcpy(*pnxt++, *pp);
@@ -1234,7 +1242,7 @@ _rmdevtabattrs(
 
 		    else {
 			/* Already a list, add this attribute to it */
-			if (*pnxt = malloc(strlen(*pp)+1))
+			if ((*pnxt = malloc(strlen(*pp)+1)))
 			    (void) strcpy(*pnxt++, *pp);
 			else {
 			    /* Out of memory, clean up */
@@ -1263,7 +1271,7 @@ _rmdevtabattrs(
 	    if (nobaderr) {
 
 		/* Open the new device table */
-		if (fd = opennewdevtab(&tempname)) {
+		if ((fd = opennewdevtab(&tempname))) {
 
 		/*
 		 * For each entry in the existing table, write that entry

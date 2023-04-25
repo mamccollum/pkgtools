@@ -43,6 +43,7 @@
 #include <signal.h>
 #ifdef __APPLE__
 #include <sys/wait.h>
+#include <spawn.h>
 #else
 #include <wait.h>
 #endif /* __APPLE__ */
@@ -182,7 +183,14 @@ pkgexecv(char *filein, char *fileout, char *uname, char *gname, char *arg[])
 	 * call to exec().
 	 */
 
+	#ifdef __APPLE__
+	/* 
+	 * On Mac OS X, vfork() is deprecated.  Use posix_spawn() instead.
+	 */
+	pid = posix_spawn(&pid, arg[0], NULL, NULL, arg, environ);
+	#else
 	pid = vfork();
+	#endif
 
 	if (pid < 0) {
 		/*

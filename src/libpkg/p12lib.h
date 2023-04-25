@@ -71,6 +71,10 @@
 
 #include <openssl/pkcs12.h>
 #include <openssl/pem.h>
+#include <openssl/stack.h>
+
+/* Define openssl to not be deprecated */
+#define	OPENSSL_NO_DEPRECATED
 
 /*
  * PKCS12 file routines borrowed from SNT's libwanboot.

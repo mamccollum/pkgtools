@@ -220,7 +220,7 @@ rdconfig(struct pkginfo *info, char *pkginst, char *ckvers)
 
 	*temp = '\0';
 	count = 0;
-	while (value = fpkgparam(fp, temp)) {
+	while ((value = fpkgparam(fp, temp))) {
 		if (strcmp(temp, "ARCH") == 0 ||
 		    strcmp(temp, "CATEGORY") == 0) {
 			/* remove all whitespace from value */
@@ -286,7 +286,11 @@ static int
 svr4info(struct pkginfo *info, char *pkginst, char *ckvers)
 {
 	static DIR *pdirfp;
+	#ifdef __APPLE__
+	struct stat status;
+	#else
 	struct stat64 status;
+	#endif
 	FILE *fp;
 	char *pt, path[128], line[128];
 	char	temp[PKGSIZ+1];
@@ -304,7 +308,11 @@ svr4info(struct pkginfo *info, char *pkginst, char *ckvers)
 
 	/* look in /usr/options direcotry for 'name' file */
 	(void) sprintf(path, "%s/%s.name", get_PKGOLD(), temp);
+	#ifdef __APPLE__
+	if (lstat(path, &status)) {
+	#else
 	if (lstat64(path, &status)) {
+	#endif
 		errno = (errno == ENOENT) ? ESRCH : EACCES;
 		return (-1);
 	}
@@ -320,9 +328,9 @@ svr4info(struct pkginfo *info, char *pkginst, char *ckvers)
 	/* /usr/options/xxx.name exists */
 	(void) fgets(line, 128, fp);
 	(void) fclose(fp);
-	if (pt = strchr(line, '\n'))
+	if ((pt = strchr(line, '\n')))
 		*pt = '\0'; /* remove trailing newline */
-	if (pt = strchr(line, ':'))
+	if ((pt = strchr(line, ':')))
 		*pt++ = '\0'; /* assumed version specification */
 
 	if (info) {
@@ -372,7 +380,11 @@ fpkginst(char *pkg, ...)
 {
 	static char pkginst[PKGSIZ+1];
 	static DIR *pdirfp;
+	#ifdef __APPLE__
+	struct dirent *dp;
+	#else
 	struct dirent64 *dp;
+	#endif
 	char	*pt, *ckarch, *ckvers;
 	va_list	ap;
 
@@ -425,7 +437,7 @@ fpkginst(char *pkg, ...)
 	 */
 	if (strcmp(pkgdir, get_PKGLOC()) == 0 && (ckarch == NULL)) {
 		/* search for pre-SVR4 instance */
-		if (pt = svr4inst(pkg))
+		if ((pt = svr4inst(pkg)))
 			return (pt);
 	}
 	errno = ESRCH;
@@ -442,7 +454,11 @@ svr4inst(char *pkg)
 	static char pkginst[PKGSIZ];
 	static DIR *pdirfp;
 	struct dirent64 *dp;
+	#ifdef __APPLE__
+	struct stat status;	/* file status buffer */
+	#else
 	struct stat64	status;	/* file status buffer */
+	#endif
 	char	*pt;
 	char	path[PATH_MAX];
 
@@ -466,7 +482,11 @@ svr4inst(char *pkg)
 			if (pkgnmchk(dp->d_name, pkg, 1))
 				continue;
 			(void) sprintf(path, "%s/%s", get_PKGOLD(), dp->d_name);
+			#ifdef __APPLE__
+			if (lstat(path, &status))
+			#else
 			if (lstat64(path, &status))
+			#endif
 				continue;
 			if ((status.st_mode & S_IFMT) != S_IFREG)
 				continue;
@@ -576,7 +596,7 @@ ckinfo(char *inst, char *arch, char *vers)
 	}
 	temp[0] = '\0';
 	myarch = myvers = NULL;
-	while (value = fpkgparam(fp, temp)) {
+	while ((value = fpkgparam(fp, temp))) {
 		if (strcmp(temp, "ARCH") == 0) {
 			/* remove all whitespace from value */
 			pt = copy = value;
