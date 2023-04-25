@@ -85,7 +85,7 @@ devtype(char *alias, struct pkgdev *devp)
 	devp->cdevice = devattr(alias, "cdevice");
 	if (devp->cdevice && devp->cdevice[0])  {
 		/* check for capacity */
-		if (name = devattr(alias, "capacity")) {
+		if ((name = devattr(alias, "capacity"))) {
 			if (name[0])
 				#ifdef __APPLE__
 				devp->capacity = atol(name);

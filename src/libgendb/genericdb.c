@@ -460,10 +460,9 @@ genericdb_exists(const char *pcRoot)
 	boolean_t result = B_FALSE;
 	genericdb *pdb = NULL;
 	genericdb_result r;
-	int iDB, record_exists = 0;
+	int iDB = 0; /* , record_exists = 0; */
 	genericdb_Error err = genericdb_OK;
 	char *pcStatus = NULL;
-
 	r = NULL;
 
 	iDB = access(pcpath, R_OK);
@@ -486,7 +485,7 @@ genericdb_exists(const char *pcRoot)
 
 					result = B_TRUE;
 				}
-				record_exists = 1;
+				/* record_exists = 1; */
 			}
 			genericdb_close(pdb);
 			pdb = NULL;

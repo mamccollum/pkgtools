@@ -21,3 +21,4 @@ PATHS = \
 	-DVSADMDIR='"$(VSADMDIR)"' \
 	-DVSADMREL='"$(VSADMDIR:/%=%)"'
 
+CFLAGS += -Wall -Werror
