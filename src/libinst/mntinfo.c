@@ -695,7 +695,7 @@ hasopt(char *options, char *keyword)
 		(void) strcpy(vfs_options, options);
 	}
 
-	while (optptr = strrchr(vfs_options, ',')) {
+	while ((optptr = strrchr(vfs_options, ','))) {
 		*optptr++ = '\0';
 
 		if (strcmp(optptr, keyword) == 0)

@@ -161,7 +161,7 @@ ckpath_stx(int pflags)
 int
 ckpath_val(char *path, int pflags)
 {
-	#ifdef __APPLE__
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	struct stat status;
 	#else
 	struct stat64 status;

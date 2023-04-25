@@ -101,7 +101,7 @@ delmap(int flag, char *pkginst)
 	}
 
 	eptnum = 0;
-	while (n = srchcfile(ept, "*", vfp, (VFP_T *)NULL)) {
+	while ((n = srchcfile(ept, "*", vfp, (VFP_T *)NULL))) {
 		if (n < 0) {
 			char	*errstr = getErrstr();
 			progerr(gettext("bad read of contents file"));

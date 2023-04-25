@@ -141,7 +141,7 @@ put_patched_pkg(int prog_flag, char *pkginst, char *pkginfo, char *ir,
 
 	strcpy(param, "PATCHLIST");
 
-	while (value = fpkgparam(fp, param)) {
+	while ((value = fpkgparam(fp, param))) {
 		if (strcmp(param, "PATCHLIST") == 0) {
 			patchlist = value;
 			break;
@@ -171,7 +171,7 @@ put_patched_pkg(int prog_flag, char *pkginst, char *pkginfo, char *ir,
 	param[0] = '\0';
 
 	for (i = 0; patch_arr[i]; i++) {
-		while (value = fpkgparam(fp, param)) {
+		while ((value = fpkgparam(fp, param))) {
 			if (snprintf(patch_info, PATH_MAX, "PATCH_INFO_%s",
 					patch_arr[i]) >= PATH_MAX)
 				return (-1);
@@ -271,8 +271,8 @@ get_fs_bo_dir(char *ir, char *patch, char *pkginst, char **bo)
 			ir, pkginst, patch) >= PATH_MAX)
 		return (-1);
 
-	if (dfp = opendir(patchdir)) {
-		while (dp = readdir(dfp)) {
+	if ((dfp = opendir(patchdir))) {
+		while ((dp = readdir(dfp))) {
 			if (dp->d_name[0] == '.')
 				continue;
 			if ((ret = find_file(dp->d_name, "remote")) == 1) {
@@ -499,8 +499,8 @@ put_patch_info_old(char *ir, genericdb *gdb)
 	if (snprintf(pkgdir, PATH_MAX, "%s" VSADMDIR "/pkg", ir) >= PATH_MAX)
 		return (-1);
 
-	if (dfp = opendir(pkgdir)) {
-		while (dp = readdir(dfp)) {
+	if ((dfp = opendir(pkgdir))) {
+		while ((dp = readdir(dfp))) {
 			if (dp->d_name[0] == '.')
 				continue;
 			if (snprintf(pkginfo_file, PATH_MAX, "%s/%s/pkginfo",

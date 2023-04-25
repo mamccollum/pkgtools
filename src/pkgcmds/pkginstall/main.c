@@ -1340,7 +1340,7 @@ main(int argc, char *argv[])
 	 * all set correctly for the ABI status of the package.
 	 */
 
-	if (pt = getenv("MAXINST")) {
+	if ((pt = getenv("MAXINST"))) {
 		maxinst = atol(pt);
 	}
 
@@ -1550,7 +1550,7 @@ main(int argc, char *argv[])
 				/*NOTREACHED*/
 			}
 
-			if (n = cp_pkgdirs()) {
+			if ((n = cp_pkgdirs())) {
 				quit(n);
 				/*NOTREACHED*/
 			}
@@ -1563,12 +1563,12 @@ main(int argc, char *argv[])
 			 * package directories renamed.
 			 */
 
-			if (n = ck_instbase()) {
+			if ((n = ck_instbase())) {
 				quit(n);
 				/*NOTREACHED*/
 			}
 
-			if (n = mv_pkgdirs()) {
+			if ((n = mv_pkgdirs())) {
 				quit(n);
 				/*NOTREACHED*/
 			}
@@ -1648,7 +1648,7 @@ main(int argc, char *argv[])
 	 */
 
 	if ((is_a_respfile()) && (preinstallCheck == B_FALSE)) {
-		if (n = merg_respfile()) {
+		if ((n = merg_respfile())) {
 			quit(n);
 			/*NOTREACHED*/
 		}
@@ -1719,7 +1719,7 @@ main(int argc, char *argv[])
 	 * capital letter, and place them in the environment.
 	 */
 	if (is_a_respfile()) {
-		if (n = merg_respfile()) {
+		if ((n = merg_respfile())) {
 			quit(n);
 			/*NOTREACHED*/
 		}
@@ -1811,12 +1811,12 @@ main(int argc, char *argv[])
 	 */
 
 	if (in_dryrun_mode()) {
-		if (n = set_cfdir(pkgdrtarg)) {
+		if ((n = set_cfdir(pkgdrtarg))) {
 			quit(n);
 			/*NOTREACHED*/
 		}
 	} else {
-		if (n = set_cfdir(NULL)) {
+		if ((n = set_cfdir(NULL))) {
 			quit(n);
 			/*NOTREACHED*/
 		}
@@ -1871,7 +1871,7 @@ main(int argc, char *argv[])
 	 * and it does not apply to any database files manipulated by the
 	 * installation service.
 	 */
-	if (pt = getenv("ULIMIT")) {
+	if ((pt = getenv("ULIMIT"))) {
 		if (assign_ulimit(pt) == -1) {
 			progerr(ERR_BADULIMIT, pt);
 			quit(99);
@@ -2235,7 +2235,7 @@ main(int argc, char *argv[])
 	}
 
 	if (!warnflag && !failflag) {
-		if (pt = getenv("PREDEPEND"))
+		if ((pt = getenv("PREDEPEND")))
 			predepend(pt);
 		(void) remove(rlockfile);
 		(void) remove(ilockfile);
@@ -2280,7 +2280,7 @@ merg_respfile()
 
 	param[0] = '\0';
 
-	while (value = fpkgparam(fp, param)) {
+	while ((value = fpkgparam(fp, param))) {
 		if (!isupper(param[0])) {
 			param[0] = '\0';
 			continue;
@@ -2303,7 +2303,7 @@ merg_respfile()
 			if (locbasedir && strcmp(value, locbasedir) != 0) {
 				char *dotptr;
 				/* Get srcinst down to a name. */
-				if (dotptr = strchr(srcinst, '.'))
+				if ((dotptr = strchr(srcinst, '.')))
 					*dotptr = '\000';
 				progerr(ERR_NEWBD, srcinst,
 					locbasedir, value);
@@ -2342,7 +2342,7 @@ ck_instbase(void)
 
 	param[0] = '\000';
 
-	while (value = fpkgparam(fp, param)) {
+	while ((value = fpkgparam(fp, param))) {
 		if (strcmp("BASEDIR", param) == 0) {
 			if (adm.basedir && *(adm.basedir) &&
 				strchr("/$", *(adm.basedir))) {
@@ -2351,7 +2351,7 @@ ck_instbase(void)
 				/*
 				 * Get srcinst down to a name.
 				 */
-				if (dotptr = strchr(srcinst, '.'))
+				if ((dotptr = strchr(srcinst, '.')))
 					*dotptr = '\000';
 				if (strcmp(value,
 					adm.basedir) != 0) {
@@ -2532,7 +2532,7 @@ merg_pkginfos(struct cl_attr **pclass, struct cl_attr ***mpclass)
 
 				/* Get srcinst down to a* name */
 
-				if (dotptr = strchr(srcinst, '.')) {
+				if ((dotptr = strchr(srcinst, '.'))) {
 					*dotptr = '\000';
 				}
 				if (strcmp(oldValue, adm.basedir) != 0) {

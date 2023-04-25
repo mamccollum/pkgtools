@@ -128,7 +128,7 @@ copyf(char *a_srcPath, char *a_dstPath, time_t a_mytime)
 	if (dstFd < 0) {
 		/* create directory structure if missing */
 		pt = a_dstPath;
-		while (pt = strchr(pt+1, '/')) {
+		while ((pt = strchr(pt+1, '/'))) {
 			*pt = '\0';
 			if (isdir(a_dstPath)) {
 				if (mkdir(a_dstPath, 0755)) {

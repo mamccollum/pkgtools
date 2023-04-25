@@ -296,7 +296,11 @@ ocfile(VFP_T **r_mapvfp, VFP_T **r_tmpvfp, ulong_t map_blks)
 
 	/* Get the contents file size */
 
+	#if defined(__APPLE__)
+	if (fstat(fileno(mapvfp->_vfpFile), &statb) == -1) {
+	#else
 	if (fstat64(fileno(mapvfp->_vfpFile), &statb) == -1) {
+	#endif
 		int	lerrno = errno;
 
 		progerr(gettext(ERR_NOSTAT), contents);
@@ -307,7 +311,11 @@ ocfile(VFP_T **r_mapvfp, VFP_T **r_tmpvfp, ulong_t map_blks)
 
 	/* Get the filesystem space */
 
+	#if defined(__APPLE__)
+	if (fstatvfs(fileno(mapvfp->_vfpFile), &svfsb) == -1) {
+	#else
 	if (fstatvfs64(fileno(mapvfp->_vfpFile), &svfsb) == -1) {
+	#endif
 		int	lerrno = errno;
 
 		progerr(gettext(ERR_NOSTATV), contents);

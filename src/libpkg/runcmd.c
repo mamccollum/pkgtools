@@ -97,7 +97,7 @@ rpterr(void)
 	int	c;
 
 	if (errfile[0]) {
-		if (fp = fopen(errfile, "r")) {
+		if ((fp = fopen(errfile, "r"))) {
 			while ((c = getc(fp)) != EOF)
 				putc(c, stderr);
 			(void) fclose(fp);
@@ -149,6 +149,7 @@ esystem(char *cmd, int ifd, int ofd)
 	 * call to exec().
 	 */
 
+	/* TODO: Darwin deprecated vfork -- use posix_spawn instead */
 	pid = vfork();
 	if (pid == 0) {
 		/*

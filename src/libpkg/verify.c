@@ -114,7 +114,7 @@ reperr(char *fmt, ...)
 	if (fmt == (char *)NULL) {
 		theErrBuf[0] = '\0';
 	} else {
-		if (n = strlen(theErrBuf)) {
+		if ((n = strlen(theErrBuf))) {
 			pt = theErrBuf + n;
 			*pt++ = '\n';
 			*pt = '\0';
@@ -647,7 +647,7 @@ averify(int fix, char *ftype, char *path, struct ainfo *ainfo)
 					p = strdup(path);
 					pt = (*p == '/') ? p+1 : p;
 					do {
-						if (pt = strchr(pt, '/'))
+						if ((pt = strchr(pt, '/')))
 							*pt = '\0';
 						if (access(p, 0) &&
 						    mkdir(p, ainfo->mode))
