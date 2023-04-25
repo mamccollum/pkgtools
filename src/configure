@@ -11,7 +11,7 @@ case "$(uname -s)" in
     Linux*)     printf "Linux\n"; cp mk.config.head.unix mk.config.head;;
     Darwin*)    printf "macOS/Darwin\n"; cp mk.config.head.darwin mk.config.head;;
     FreeBSD*)   printf "FreeBSD\n"; cp mk.config.head.fbsd mk.config.head;;
-    *)          printf "Unknown system. Defaulting to generic Unix...\n";;
+    *)          printf "Unknown system. Defaulting to generic Unix...\n"; cp mk.config.head.unix mk.config.head;;
 esac
 
 printf "[ MAKE ] Checking for make... "
