@@ -3,7 +3,7 @@
 cd root
 
 # make prototype file to list files to be packaged
-echo "i pkginfo" >> prototype
+echo "i pkginfo" > prototype
 pkgproto usr >> prototype
 
 # make package into filesystem format

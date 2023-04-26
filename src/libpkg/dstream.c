@@ -79,12 +79,11 @@ extern int	getvol(char *device, char *label, int options, char *prompt);
 
 #define	CMDSIZ	512
 #define	LSIZE	128
-/* below is broken on some configs. use /usr/bin/cpio, etc instead.
-#define	DDPROC		BINDIR "/dd"
-#define	CPIOPROC	BINDIR "/cpio"
-*/
+/* ugh.
+#define	DDPROC		BINDIR "/dd" */
+#define	CPIOPROC	BINDIR "/cpio.traditional"
 #define	DDPROC		"/usr/bin/dd"
-#define	CPIOPROC	"/usr/bin/cpio"
+/* #define	CPIOPROC	"/usr/bin/cpio" */
 
 /* device types */
 
