@@ -7,7 +7,6 @@ See [README.d](README.d/) for OS-specific documentation & other information.
 ## Notes
 - You need OpenSSL/LibreSSL headers to compile this.
 - You also need GNU gettext to compile this and run.
-- **!!! THIS IS AN IMPORTANT ONE !!!** You NEED either GNU cpio or Heirloom cpio. BSD/macOS cpio BREAKS the program during runtime. You will have to make a link from `$(PREFIX)/bin/cpio.traditional` that redirects to the GNU or Heirloom binary for `cpio` to work properly.
 
 ## Building
 
