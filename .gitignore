@@ -49,6 +49,7 @@ src/ccs
 
 # etc
 .vscode/
+.DS_Store
 
 # example pkg
 example-pkg/root/usr/bin/example
