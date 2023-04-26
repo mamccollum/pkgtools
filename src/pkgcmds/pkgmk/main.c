@@ -818,7 +818,7 @@ ckmissing(char *path, char type)
 	pt = path;
 	if (*pt == '/')
 		pt++;
-	while (pt = strchr(pt, '/')) {
+	while ((pt = strchr(pt, '/'))) {
 		*pt = '\0';
 		found = 0;
 		for (i = 0; i < ndir; i++) {

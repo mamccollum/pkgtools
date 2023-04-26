@@ -1545,7 +1545,7 @@ main(int argc, char *argv[])
 			 * and copy operation is necessary.
 			 */
 
-			if (n = merg_pkginfos(pclass, &mergd_pclass)) {
+			if ((n = merg_pkginfos(pclass, &mergd_pclass))) {
 				quit(n);
 				/*NOTREACHED*/
 			}

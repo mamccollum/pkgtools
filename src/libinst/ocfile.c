@@ -231,7 +231,7 @@ set_cfdir(char *cfdir)
 int
 ocfile(VFP_T **r_mapvfp, VFP_T **r_tmpvfp, ulong_t map_blks)
 {
-	#if defined(__APPLE) || defined(__FreeBSD__)
+	#if defined(__APPLE__) || defined(__FreeBSD__)
 	struct stat	statb;
 	struct statvfs	svfsb;
 	#else
